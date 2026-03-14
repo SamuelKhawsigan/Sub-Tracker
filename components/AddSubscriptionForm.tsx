@@ -18,7 +18,6 @@ export default function AddSubscriptionForm({ onAdd }: { onAdd: () => void }) {
                 name,
                 price: parseFloat(price),
                 billing_cycle: cycle,
-                category: 'Entertainment' // Defaulting for now
             }
         ])
 
