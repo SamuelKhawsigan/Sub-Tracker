@@ -7,6 +7,7 @@ export default function AddSubscriptionForm({ onAdd }: { onAdd: () => void }) {
     const [name, setName] = useState('')
     const [price, setPrice] = useState('')
     const [cycle, setCycle] = useState('monthly')
+    const [category, setCategory] = useState('Entertainment') // New State
     const [isSubmitting, setIsSubmitting] = useState(false)
 
     const handleSubmit = async (e: React.FormEvent) => {
@@ -18,7 +19,7 @@ export default function AddSubscriptionForm({ onAdd }: { onAdd: () => void }) {
                 name,
                 price: parseFloat(price),
                 billing_cycle: cycle,
-                category: 'Entertainment'
+                category: category // Using the selected category
             }
         ])
 
@@ -31,6 +32,8 @@ export default function AddSubscriptionForm({ onAdd }: { onAdd: () => void }) {
         }
         setIsSubmitting(false)
     }
+
+    const categories = ['Entertainment', 'Work', 'Utilities', 'Health', 'Education', 'Other']
 
     return (
         <form onSubmit={handleSubmit} className="space-y-6">
@@ -45,6 +48,22 @@ export default function AddSubscriptionForm({ onAdd }: { onAdd: () => void }) {
                         className="w-full mt-1 p-4 bg-white/5 border border-white/10 rounded-2xl focus:border-purple-500/50 focus:bg-white/10 outline-none transition-all text-white placeholder:text-slate-600"
                         required
                     />
+                </div>
+
+                {/* New Category Dropdown */}
+                <div>
+                    <label className="text-[10px] font-bold uppercase tracking-[0.2em] text-slate-500 ml-1">Category</label>
+                    <select
+                        value={category}
+                        onChange={(e) => setCategory(e.target.value)}
+                        className="w-full mt-1 p-4 bg-white/5 border border-white/10 rounded-2xl focus:border-purple-500/50 focus:bg-white/10 outline-none transition-all text-white appearance-none"
+                    >
+                        {categories.map((cat) => (
+                            <option key={cat} value={cat} className="bg-[#050505]">
+                                {cat}
+                            </option>
+                        ))}
+                    </select>
                 </div>
 
                 <div className="grid grid-cols-2 gap-4">
